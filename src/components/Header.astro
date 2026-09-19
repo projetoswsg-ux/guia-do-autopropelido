@@ -10,8 +10,15 @@ const navItems = [
 
 <header class="site-header">
   <div class="container header-inner">
-    <div class="site-title">
-      <a href="/">Guia do Autopropelido</a>
+    <div class="site-logo">
+      <a href="/" aria-label="Guia do Autopropelido — Página inicial">
+        <img
+          src="/logo.jpeg"
+          alt="Guia do Autopropelido — O portal brasileiro dos elétricos"
+          width="600"
+          height="110"
+        />
+      </a>
     </div>
 
     <button
@@ -48,7 +55,6 @@ const navItems = [
       toggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
     });
 
-    // Fecha o menu ao clicar em um link (útil em mobile)
     nav.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         nav.classList.remove('is-open');
