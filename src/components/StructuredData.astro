@@ -1,0 +1,32 @@
+---
+const { noticia } = Astro.props;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": noticia.data.title,
+  "description": noticia.data.description,
+  "image": noticia.data.image ? [noticia.data.image] : undefined,
+  "datePublished": noticia.data.date,
+  "dateModified": noticia.data.date,
+  "author": [{
+    "@type": "Person",
+    "name": noticia.data.author || "Redação",
+    "url": Astro.site + "/fale-conosco"
+  }],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Guia do Autopropelido",
+    "logo": {
+      "@type": "ImageObject",
+      "url": new URL('/logo.png', Astro.site).href
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": new URL(`/noticias/${noticia.slug}`, Astro.site).href
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
