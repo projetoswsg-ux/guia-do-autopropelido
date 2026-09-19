@@ -67,19 +67,18 @@ img {
 }
 
 /* ==============================
-   Botão hamburguer (mobile)
+   Botão hamburguer (só aparece no mobile)
    ============================== */
 .menu-toggle {
   display: none;
   flex-direction: column;
   justify-content: space-between;
   width: 32px;
-  height: 24px;
+  height: 22px;
   background: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
-  z-index: 110;
 }
 
 .hamburger-line {
@@ -93,7 +92,7 @@ img {
 
 /* Animação do X quando aberto */
 .menu-toggle.is-active .hamburger-line:nth-child(1) {
-  transform: translateY(10.5px) rotate(45deg);
+  transform: translateY(9.5px) rotate(45deg);
 }
 
 .menu-toggle.is-active .hamburger-line:nth-child(2) {
@@ -101,7 +100,7 @@ img {
 }
 
 .menu-toggle.is-active .hamburger-line:nth-child(3) {
-  transform: translateY(-10.5px) rotate(-45deg);
+  transform: translateY(-9.5px) rotate(-45deg);
 }
 
 /* ==============================
@@ -249,9 +248,10 @@ img {
 }
 
 /* ==============================
-   Responsivo — Mobile
+   RESPONSIVO — MOBILE
    ============================== */
 @media (max-width: 768px) {
+
   .site-title {
     font-size: 1.3rem;
   }
@@ -261,27 +261,25 @@ img {
     display: flex;
   }
 
-  /* Menu recolhido por padrão */
+  /* O nav vira uma "linha" que ocupa 100% abaixo do título/botão */
   .main-nav {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #fff;
-    border-bottom: 3px solid #1a1a1a;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
+    display: none;
+    width: 100%;
+    order: 3;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 12px;
   }
 
+  /* Quando .is-open é adicionada pelo JS, o nav aparece */
   .main-nav.is-open {
-    max-height: 400px;
+    display: block;
   }
 
+  /* Links empilhados verticalmente */
   .main-nav ul {
     flex-direction: column;
     gap: 0;
-    padding: 8px 20px 16px;
+    padding: 8px 0 4px;
   }
 
   .main-nav li {
@@ -304,12 +302,11 @@ img {
     transition: padding-left 0.2s;
   }
 
-  /* Ajuste do título do artigo no mobile */
+  /* Ajustes gerais para telas pequenas */
   .article-header h1 {
     font-size: 1.8rem;
   }
 
-  /* Ajuste do grid de notícias no mobile */
   .news-grid {
     grid-template-columns: 1fr;
     gap: 24px;
