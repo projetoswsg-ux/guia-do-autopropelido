@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const marcas = [
+  { nome: 'XZ Motors', pais: 'Brasil', destaque: 'Startup nacional focada em autopropelidos acessíveis.' },
+  { nome: 'AutoNova', pais: 'EUA', destaque: 'Pioneira em veículos autônomos de nível 4.' },
+  { nome: 'VoltRide', pais: 'Alemanha', destaque: 'Especializada em mobilidade urbana elétrica e autônoma.' },
+  { nome: 'NipoDrive', pais: 'Japão', destaque: 'Tradição em robótica aplicada à mobilidade.' },
+];
+---
+
+<BaseLayout title="Marcas — Guia do Autopropelido">
+  <section style="margin: 40px 0;">
+    <h1 style="font-size: 2rem; margin-bottom: 8px;">Marcas</h1>
+    <p style="color: #666; margin-bottom: 32px;">Principais fabricantes de autopropelidos no mundo.</p>
+
+    <div style="display: grid; gap: 24px;">
+      {marcas.map((marca) => (
+        <div style="border: 1px solid #e0e0e0; padding: 24px; border-radius: 4px;">
+          <h2 style="font-size: 1.3rem; margin-bottom: 4px;">{marca.nome}</h2>
+          <span style="font-size: 0.85rem; color: #888; text-transform: uppercase;">{marca.pais}</span>
+          <p style="margin-top: 8px; color: #444;">{marca.destaque}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
