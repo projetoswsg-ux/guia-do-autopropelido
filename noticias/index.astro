@@ -1,0 +1,81 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import NewsCard from '../../components/NewsCard.astro';
+
+// Busca todas as notícias publicadas (exclui rascunhos)
+const noticias = (await getCollection('noticias', ({ data }) => {
+  return data.draft !== true;
+})).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="Notícias" description="Todas as notícias do Guia do Autopropelido">
+  <Header />
+  <main>
+    <section class="page-header">
+      <h1>Todas as <span>Notícias</span></h1>
+      <p>{noticias.length} {noticias.length === 1 ? 'notícia publicada' : 'notícias publicadas'}</p>
+    </section>
+
+    <section class="news-grid">
+      {noticias.length === 0 ? (
+        <p class="empty">Nenhuma notícia publicada ainda. Volte em breve!</p>
+      ) : (
+        noticias.map(noticia => (
+          <NewsCard
+            title={noticia.data.title}
+            description={noticia.data.description}
+            pubDate={noticia.data.pubDate}
+            slug={noticia.slug}
+            tags={noticia.data.tags}
+            image={noticia.data.image}
+          />
+        ))
+      )}
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-header {
+    text-align: center;
+    padding: 3.5rem 1.5rem 2.5rem;
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+    color: #f1f5f9;
+    margin: 0 0 0.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+  }
+
+  .page-header h1 span {
+    color: #38bdf8;
+  }
+
+  .page-header p {
+    color: #64748b;
+    font-size: 1rem;
+  }
+
+  .news-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+  }
+
+  .empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #64748b;
+    font-size: 1.1rem;
+    padding: 3rem 0;
+  }
+</style>
