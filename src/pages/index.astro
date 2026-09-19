@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsCard from '../components/NewsCard.astro';
+
+const noticias = await getCollection('noticias');
+const ultimasNoticias = noticias
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 6);
+---
+
+<BaseLayout title="Guia do Autopropelido — Últimas Notícias">
+  <section style="margin: 40px 0;">
+    <h1 style="font-size: 2rem; margin-bottom: 8px;">Últimas Notícias</h1>
+    <p style="color: #666; margin-bottom: 32px;">As novidades mais recentes sobre autopropelidos no Brasil e no mundo.</p>
+
+    <div class="news-grid">
+      {ultimasNoticias.map((noticia) => (
+        <NewsCard
+          title={noticia.data.title}
+          description={noticia.data.description}
+          image={noticia.data.image}
+          date={noticia.data.date}
+          slug={noticia.slug}
+        />
+      ))}
+    </div>
+
+    {ultimasNoticias.length === 0 && (
+      <p>Nenhuma notícia publicada ainda. Adicione arquivos Markdown em <code>src/content/noticias/</code>.</p>
+    )}
+  </section>
+</BaseLayout>
