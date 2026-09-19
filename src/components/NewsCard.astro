@@ -1,0 +1,14 @@
+---
+const { title, description, image, date, slug } = Astro.props;
+---
+
+<article class="news-card">
+  <a href={`/noticias/${slug}`}>
+    {image && <img src={image} alt={title} loading="lazy" />}
+    <div class="news-card-content">
+      <span class="date">{date}</span>
+      <h3>{title}</h3>
+      <p>{description}</p>
+    </div>
+  </a>
+</article>
