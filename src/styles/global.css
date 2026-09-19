@@ -52,18 +52,25 @@ img {
   gap: 16px;
 }
 
-.site-title {
-  font-size: 1.6rem;
-  font-weight: 800;
-  letter-spacing: -0.5px;
+.site-logo {
+  display: flex;
+  align-items: center;
 }
 
-.site-title a {
-  color: #1a1a1a;
+.site-logo a {
+  display: inline-flex;
+  align-items: center;
 }
 
-.site-title a:hover {
+.site-logo a:hover {
   text-decoration: none;
+  opacity: 0.85;
+}
+
+.site-logo img {
+  display: block;
+  height: 60px;        /* ajuste aqui para controlar o tamanho */
+  width: auto;         /* mantém a proporção */
 }
 
 /* ==============================
@@ -252,9 +259,9 @@ img {
    ============================== */
 @media (max-width: 768px) {
 
-  .site-title {
-    font-size: 1.3rem;
-  }
+ .site-logo img {
+  height: 45px;   /* logo menor no mobile */
+}
 
   /* Mostra o botão hamburguer */
   .menu-toggle {
