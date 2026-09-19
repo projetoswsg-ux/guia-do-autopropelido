@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -7,135 +7,18 @@ import Footer from '../../components/Footer.astro';
 export async function getStaticPaths() {
   const noticias = await getCollection('noticias');
   return noticias.map(noticia => ({
-    params: { slug: noticia.slug },
+    // Usamos .id em vez de .slug para o parâmetro da rota
+    params: { slug: noticia.id }, 
     props: { noticia }
   }));
 }
 
 const { noticia } = Astro.props;
-const { Content } = await noticia.render();
+// A nova forma de renderizar o conteúdo é com a função render()
+const { Content } = await render(noticia); 
 const formattedDate = noticia.data.pubDate.toLocaleDateString('pt-BR', {
   day: '2-digit',
   month: 'long',
   year: 'numeric'
 });
 ---
-
-<BaseLayout title={noticia.data.title} description={noticia.data.description}>
-  <Header />
-  <main>
-    <article class="noticia">
-      <header class="noticia-header">
-        <a href="/" class="back-link">← Voltar para a página inicial</a>
-        <h1>{noticia.data.title}</h1>
-        <div class="meta">
-          <time datetime={noticia.data.pubDate.toISOString()}>{formattedDate}</time>
-          <span class="author">Por {noticia.data.author}</span>
-        </div>
-        {noticia.data.tags.length > 0 && (
-          <div class="tags">
-            {noticia.data.tags.map(tag => <span class="tag">{tag}</span>)}
-          </div>
-        )}
-      </header>
-      <div class="content">
-        <Content />
-      </div>
-    </article>
-  </main>
-  <Footer />
-</BaseLayout>
-
-<style>
-  .noticia {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem;
-  }
-
-  .back-link {
-    color: #38bdf8;
-    text-decoration: none;
-    font-size: 0.9rem;
-    display: inline-block;
-    margin-bottom: 1.5rem;
-  }
-
-  .noticia-header h1 {
-    font-size: 2rem;
-    color: #f1f5f9;
-    line-height: 1.3;
-    margin: 0 0 1rem;
-  }
-
-  .meta {
-    display: flex;
-    gap: 1rem;
-    color: #64748b;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-  }
-
-  .meta time {
-    color: #38bdf8;
-    font-weight: 600;
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .tag {
-    background: #1e293b;
-    color: #38bdf8;
-    padding: 0.25rem 0.75rem;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    border: 1px solid #1e40af;
-  }
-
-  .content {
-    color: #cbd5e1;
-    line-height: 1.8;
-    font-size: 1.05rem;
-  }
-
-  .content :global(h2) {
-    color: #f1f5f9;
-    margin-top: 2rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .content :global(h3) {
-    color: #e2e8f0;
-    margin-top: 1.5rem;
-  }
-
-  .content :global(a) {
-    color: #38bdf8;
-  }
-
-  .content :global(ul), .content :global(ol) {
-    padding-left: 1.5rem;
-  }
-
-  .content :global(li) {
-    margin-bottom: 0.5rem;
-  }
-
-  .content :global(blockquote) {
-    border-left: 3px solid #38bdf8;
-    padding-left: 1rem;
-    margin-left: 0;
-    color: #94a3b8;
-    font-style: italic;
-  }
-
-  .content :global(img) {
-    max-width: 100%;
-    border-radius: 8px;
-  }
-</style>
