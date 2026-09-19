@@ -1,0 +1,24 @@
+---
+const navItems = [
+  { href: '/trend', label: 'Trend' },
+  { href: '/marcas', label: 'Marcas' },
+  { href: '/ficha-tecnica', label: 'Ficha Técnica' },
+  { href: '/fale-conosco', label: 'Fale Conosco' },
+  { href: '/privacidade', label: 'Privacidade' },
+];
+---
+
+<header class="site-header">
+  <div class="container">
+    <div class="site-title">
+      <a href="/">Guia do Autopropelido</a>
+    </div>
+    <nav class="main-nav">
+      <ul>
+        {navItems.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
