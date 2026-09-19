@@ -24,7 +24,7 @@ const noticias = (await getCollection('noticias', ({ data }) => {
         <p class="empty">Nenhuma notícia publicada ainda. Volte em breve!</p>
       ) : (
         noticias.map(noticia => (
-          <NewsCard
+          <slug={noticia.slug}
             title={noticia.data.title}
             description={noticia.data.description}
             pubDate={noticia.data.pubDate}
