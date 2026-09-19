@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedNews from '../../components/RelatedNews.astro';
 
 export async function getStaticPaths() {
   const noticias = await getCollection('noticias');
@@ -12,6 +13,13 @@ export async function getStaticPaths() {
 
 const { noticia } = Astro.props;
 const { Content } = await noticia.render();
+
+// Busca as últimas notícias, excluindo a atual
+const todas = await getCollection('noticias');
+const ultimas = todas
+  .filter((n) => n.slug !== noticia.slug)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 4);
 ---
 
 <BaseLayout title={`${noticia.data.title} — Guia do Autopropelido`} description={noticia.data.description}>
@@ -31,4 +39,6 @@ const { Content } = await noticia.render();
       <Content />
     </div>
   </article>
+
+  <RelatedNews noticias={ultimas} titulo="Últimas notícias" />
 </BaseLayout>
