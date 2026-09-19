@@ -1,0 +1,25 @@
+---
+const { noticias, titulo = 'Últimas notícias' } = Astro.props;
+---
+
+{noticias.length > 0 && (
+  <section class="related-news">
+    <h2 class="related-title">{titulo}</h2>
+    <div class="related-grid">
+      {noticias.map((noticia) => (
+        <a href={`/noticias/${noticia.slug}`} class="related-card">
+          {noticia.data.image && (
+            <div class="related-thumb">
+              <img src={noticia.data.image} alt={noticia.data.title} loading="lazy" />
+            </div>
+          )}
+          <div class="related-info">
+            <span class="related-category">{noticia.data.category}</span>
+            <h3>{noticia.data.title}</h3>
+            <span class="related-date">{noticia.data.date}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
