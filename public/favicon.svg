@@ -1,10 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <image
-    href="https://guia-do-autopropelido.vercel.app/favicon%2052x52.jpeg"
-    x="0"
-    y="0"
-    width="32"
-    height="32"
-    preserveAspectRatio="xMidYMid slice"
-  />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <!-- Base da letra G em azul -->
+  <path d="M 50 5 
+           C 25 5 5 25 5 50 
+           C 5 75 25 95 50 95 
+           C 68 95 83 85 89 70 
+           L 89 45 
+           L 50 45 
+           L 50 65 
+           L 69 65 
+           C 66 73 59 76 50 76 
+           C 35 76 25 64 25 50 
+           C 25 36 35 24 50 24 
+           C 60 24 68 29 73 36 
+           L 89 22 
+           C 80 11 66 5 50 5 Z" 
+        fill="#0066FF"/>
+  
+  <!-- Traços brancos inferiores (estilo pista) -->
+  <!-- Traço Central -->
+  <rect x="43" y="82" width="14" height="4.5" rx="2.25" fill="#FFFFFF"/>
+  
+  <!-- Traço Esquerdo -->
+  <rect x="23" y="75" width="14" height="4.5" rx="2.25" transform="rotate(35 30 77.25)" fill="#FFFFFF"/>
+  
+  <!-- Traço Direito -->
+  <rect x="63" y="75" width="14" height="4.5" rx="2.25" transform="rotate(-35 70 77.25)" fill="#FFFFFF"/>
 </svg>
