@@ -30,6 +30,9 @@ const { title = 'Guia do Autopropelido', description = 'Portal de notícias sobr
   <meta name="twitter:image" content={new URL(image, Astro.site)} />
 
   <title>{title}</title>
+
+ <!-- ... todos os meta tags anteriores ... -->
+  <slot name="head" />
   </head>
   <body>
     <Header />
