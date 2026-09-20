@@ -1,8 +1,8 @@
 ---
-import StructuredData from '../../components/StructuredData.astro';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RelatedNews from '../../components/RelatedNews.astro';
+import StructuredData from '../../components/StructuredData.astro';
 
 export async function getStaticPaths() {
   const noticias = await getCollection('noticias');
@@ -15,13 +15,13 @@ export async function getStaticPaths() {
 const { noticia } = Astro.props;
 const { Content } = await noticia.render();
 
-// Busca as últimas notícias, excluindo a atual
 const todas = await getCollection('noticias');
 const ultimas = todas
   .filter((n) => n.slug !== noticia.slug)
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
   .slice(0, 4);
 ---
+
 <BaseLayout
   title={`${noticia.data.title} — Guia do Autopropelido`}
   description={noticia.data.description}
@@ -29,7 +29,6 @@ const ultimas = todas
 >
   <StructuredData slot="head" noticia={noticia} />
 
-<BaseLayout title={`${noticia.data.title} — Guia do Autopropelido`} description={noticia.data.description}>
   <article style="max-width: 800px; margin: 40px auto;">
     <header class="article-header">
       <h1>{noticia.data.title}</h1>
