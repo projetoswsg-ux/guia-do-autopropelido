@@ -1,0 +1,12 @@
+# Guia do Autopropelido
+
+> O portal brasileiro dos elétricos. Notícias, análises e fichas técnicas sobre autopropelidos, veículos elétricos e mobilidade urbana no Brasil.
+
+## Notícias
+- [Trend - Últimas Notícias](https://guia-do-autopropelido.vercel.app/trend): Lista cronológica de todas as notícias publicadas.
+- [Marcas](https://guia-do-autopropelido.vercel.app/marcas): Principais fabricantes de autopropelidos no mundo.
+- [Ficha Técnica](https://guia-do-autopropelido.vercel.app/ficha-tecnica): Especificações técnicas do modelo de referência XZ-4000.
+
+## Institucional
+- [Sobre / Fale Conosco](https://guia-do-autopropelido.vercel.app/fale-conosco)
+- [Política de Privacidade](https://guia-do-autopropelido.vercel.app/privacidade)
