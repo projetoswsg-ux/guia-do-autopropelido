@@ -1,4 +1,17 @@
 User-agent: *
 Allow: /
 
+# Bots de IA Generativa (permitir para ser citado)
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
 Sitemap: https://guia-do-autopropelido.vercel.app/sitemap-index.xml
