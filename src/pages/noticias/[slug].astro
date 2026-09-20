@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RelatedNews from '../../components/RelatedNews.astro';
 import StructuredData from '../../components/StructuredData.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
 
 export async function getStaticPaths() {
   const noticias = await getCollection('noticias');
@@ -44,7 +45,16 @@ const ultimas = todas
     <div class="article-body">
       <Content />
     </div>
+    <ShareButtons
+      url={new URL(`/noticias/${noticia.slug}`, Astro.site).href}
+      title={noticia.data.title}
+    />
   </article>
+
+ 
+
+   
+
 
   <RelatedNews noticias={ultimas} titulo="Últimas notícias" />
 </BaseLayout>
