@@ -2,7 +2,7 @@
 
 A maneira como as pessoas se deslocam pelas cidades está mudando. Ao lado dos automóveis, motocicletas e bicicletas tradicionais, uma nova categoria de veículos começa a ganhar espaço nas ruas: os **autopropelidos**.
 
-Pequenos, elétricos e geralmente voltados para deslocamentos curtos, esses veículos representam uma transformação importante na mobilidade urbana. Mais do que uma tendência tecnológica, eles refletem uma mudança na maneira como as pessoas enxergam distância, transporte e liberdade de locomoção.
+Pequenos, elétricos e geralmente voltados para deslocamentos curtos, esses veículos representam uma transformação importante na mobilidade urbana. Mais do que uma tendência tecnológica, eles refletem uma mudança na maneira como as pessoas enxergam distância, transporte e liberdade de locomoção. 
 
 ## Uma nova geração de veículos
 
