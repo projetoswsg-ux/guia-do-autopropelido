@@ -1,30 +1,35 @@
 ---
 const { noticia } = Astro.props;
 
+const url = new URL(`/noticias/${noticia.slug}`, Astro.site).href;
+const logoUrl = new URL('/logo.png', Astro.site).href;
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "NewsArticle",
   "headline": noticia.data.title,
   "description": noticia.data.description,
-  "image": noticia.data.image ? [noticia.data.image] : undefined,
+  "image": noticia.data.image ? [noticia.data.image] : [logoUrl],
   "datePublished": noticia.data.date,
   "dateModified": noticia.data.date,
-  "author": [{
-    "@type": "Person",
-    "name": noticia.data.author || "Redação",
-    "url": Astro.site + "/fale-conosco"
-  }],
+  "author": [
+    {
+      "@type": "Person",
+      "name": noticia.data.author || "Redação",
+      "url": new URL('/fale-conosco', Astro.site).href
+    }
+  ],
   "publisher": {
     "@type": "Organization",
     "name": "Guia do Autopropelido",
     "logo": {
       "@type": "ImageObject",
-      "url": new URL('/logo.png', Astro.site).href
+      "url": logoUrl
     }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": new URL(`/noticias/${noticia.slug}`, Astro.site).href
+    "@id": url
   }
 };
 ---
