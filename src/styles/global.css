@@ -69,8 +69,8 @@ img {
 
 .site-logo img {
   display: block;
-  height: 60px;        /* ajuste aqui para controlar o tamanho */
-  width: auto;         /* mantém a proporção */
+  height: 60px;
+  width: auto;
 }
 
 /* ==============================
@@ -97,7 +97,6 @@ img {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Animação do X quando aberto */
 .menu-toggle.is-active .hamburger-line:nth-child(1) {
   transform: translateY(9.5px) rotate(45deg);
 }
@@ -255,148 +254,6 @@ img {
 }
 
 /* ==============================
-   RESPONSIVO — MOBILE
-   ============================== */
-@media (max-width: 768px) {
-
- .site-logo img {
-  height: 45px;   /* logo menor no mobile */
-}
-
-  /* Mostra o botão hamburguer */
-  .menu-toggle {
-    display: flex;
-  }
-
-  /* O nav vira uma "linha" que ocupa 100% abaixo do título/botão */
-  .main-nav {
-    display: none;
-    width: 100%;
-    order: 3;
-    border-top: 1px solid #e0e0e0;
-    margin-top: 12px;
-  }
-
-  /* Quando .is-open é adicionada pelo JS, o nav aparece */
-  .main-nav.is-open {
-    display: block;
-  }
-
-  /* Links empilhados verticalmente */
-  .main-nav ul {
-    flex-direction: column;
-    gap: 0;
-    padding: 8px 0 4px;
-  }
-
-  .main-nav li {
-    border-bottom: 1px solid #eee;
-  }
-
-  .main-nav li:last-child {
-    border-bottom: none;
-  }
-
-  .main-nav a {
-    display: block;
-    padding: 14px 0;
-    font-size: 1rem;
-  }
-
-  .main-nav a:hover {
-    border-bottom: none;
-    padding-left: 6px;
-    transition: padding-left 0.2s;
-  }
-
-  /* Ajustes gerais para telas pequenas */
-  .article-header h1 {
-    font-size: 1.8rem;
-  }
-
-  .news-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-
-
-
-  /* Últimas notícias — mobile */
-  .related-news {
-    margin: 40px auto 20px;
-    padding-top: 24px;
-  }
-
-  .related-title {
-    font-size: 1.15rem;
-    margin-bottom: 16px;
-  }
-
-  .related-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .related-card {
-    gap: 12px;
-    padding: 10px;
-  }
-
-  .related-thumb {
-    width: 80px;
-    height: 80px;
-  }
-
-  .related-info h3 {
-    font-size: 0.9rem;
-    -webkit-line-clamp: 2;
-  }
-
-
-
-
-  
-}
-
-
-
-
-
-/* ==============================
-   Telas muito pequenas (< 480px)
-   ============================== */
-@media (max-width: 480px) {
-  .related-thumb {
-    width: 70px;
-    height: 70px;
-  }
-
-  .related-card {
-    gap: 10px;
-    padding: 8px;
-  }
-
-  .related-info h3 {
-    font-size: 0.85rem;
-    -webkit-line-clamp: 3;
-  }
-
-  .related-category {
-    font-size: 0.65rem;
-  }
-
-  .related-date {
-    font-size: 0.7rem;
-  }
-}
-
-
-
-
-
-
-/* ==============================
    Últimas notícias (final do artigo)
    ============================== */
 .related-news {
@@ -490,8 +347,69 @@ img {
   color: #888;
 }
 
-/* Mobile: 1 coluna */
+/* ==============================
+   RESPONSIVO — MOBILE (≤ 768px)
+   ============================== */
 @media (max-width: 768px) {
+  .site-logo img {
+    height: 45px;
+  }
+
+  /* Menu hamburguer */
+  .menu-toggle {
+    display: flex;
+  }
+
+  .main-nav {
+    display: none;
+    width: 100%;
+    order: 3;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 12px;
+  }
+
+  .main-nav.is-open {
+    display: block;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 8px 0 4px;
+  }
+
+  .main-nav li {
+    border-bottom: 1px solid #eee;
+  }
+
+  .main-nav li:last-child {
+    border-bottom: none;
+  }
+
+  .main-nav a {
+    display: block;
+    padding: 14px 0;
+    font-size: 1rem;
+  }
+
+  .main-nav a:hover {
+    border-bottom: none;
+    padding-left: 6px;
+    transition: padding-left 0.2s;
+  }
+
+  /* Artigo */
+  .article-header h1 {
+    font-size: 1.8rem;
+  }
+
+  /* Grid de notícias */
+  .news-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* Últimas notícias — 1 coluna no mobile */
   .related-news {
     margin: 40px auto 20px;
     padding-top: 24px;
@@ -503,7 +421,7 @@ img {
   }
 
   .related-grid {
-    grid-template-columns: 1fr;  /* ← 1 coluna no mobile */
+    grid-template-columns: 1fr;
     gap: 14px;
   }
 
@@ -520,5 +438,33 @@ img {
   .related-info h3 {
     font-size: 0.9rem;
     -webkit-line-clamp: 2;
+  }
+}
+
+/* ==============================
+   RESPONSIVO — TELAS MUITO PEQUENAS (≤ 480px)
+   ============================== */
+@media (max-width: 480px) {
+  .related-thumb {
+    width: 70px;
+    height: 70px;
+  }
+
+  .related-card {
+    gap: 10px;
+    padding: 8px;
+  }
+
+  .related-info h3 {
+    font-size: 0.85rem;
+    -webkit-line-clamp: 3;
+  }
+
+  .related-category {
+    font-size: 0.65rem;
+  }
+
+  .related-date {
+    font-size: 0.7rem;
   }
 }
