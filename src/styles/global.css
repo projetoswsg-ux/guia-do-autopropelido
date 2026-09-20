@@ -522,3 +522,134 @@ img {
     -webkit-line-clamp: 2;
   }
 }
+
+
+
+/* ==============================
+   Botões de compartilhar
+   ============================== */
+.share-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 40px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.share-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #666;
+  margin-right: 4px;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background: #fff;
+  color: #1a1a1a;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.1s;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.share-btn:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.share-btn svg {
+  flex-shrink: 0;
+}
+
+/* Cores de cada rede no hover */
+.share-whatsapp:hover {
+  background: #25D366;
+  border-color: #25D366;
+  color: #fff;
+}
+
+.share-facebook:hover {
+  background: #1877F2;
+  border-color: #1877F2;
+  color: #fff;
+}
+
+.share-x:hover {
+  background: #000;
+  border-color: #000;
+  color: #fff;
+}
+
+.share-linkedin:hover {
+  background: #0A66C2;
+  border-color: #0A66C2;
+  color: #fff;
+}
+
+.share-native {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  color: #fff;
+}
+
+.share-native:hover {
+  background: #333;
+  border-color: #333;
+}
+
+.share-copy.is-copied {
+  background: #16a34a;
+  border-color: #16a34a;
+  color: #fff;
+}
+
+/* Mobile: botões viram ícones compactos */
+@media (max-width: 768px) {
+  .share-bar {
+    gap: 6px;
+    margin-top: 32px;
+    padding-top: 20px;
+  }
+
+  .share-label {
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .share-btn {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  /* Esconde o texto, deixa só o ícone no mobile */
+  .share-btn span {
+    display: none;
+  }
+
+  /* Exceto o botão "Compartilhar" nativo, que continua com texto */
+  .share-native span {
+    display: inline;
+  }
+}
+
+@media (max-width: 480px) {
+  .share-native span {
+    display: none;
+  }
+
+  .share-native {
+    padding: 8px 12px;
+  }
+}
