@@ -604,6 +604,25 @@ img {
   display: block;
 }
 
+
+/* Placeholder para páginas sem imagem */
+.search-thumb-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+  border: 1px solid #e0e0e0;
+}
+
+.search-thumb-page span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #999;
+}
+
+
 .search-info {
   min-width: 0;
   flex: 1;
