@@ -1,4 +1,5 @@
 ---
+import StructuredData from '../../components/StructuredData.astro';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RelatedNews from '../../components/RelatedNews.astro';
@@ -21,6 +22,12 @@ const ultimas = todas
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
   .slice(0, 4);
 ---
+<BaseLayout
+  title={`${noticia.data.title} — Guia do Autopropelido`}
+  description={noticia.data.description}
+  image={noticia.data.image}
+>
+  <StructuredData slot="head" noticia={noticia} />
 
 <BaseLayout title={`${noticia.data.title} — Guia do Autopropelido`} description={noticia.data.description}>
   <article style="max-width: 800px; margin: 40px auto;">
