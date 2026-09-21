@@ -1,6 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ShareButtons from '../components/ShareButtons.astro';
 import { modelos } from '../data/modelos.js';
+
+// Gera um id âncora a partir do nome do modelo
+function slugify(s) {
+  return s
+    .toString()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
+// Monta dados prontos para o template
+const modelosComMeta = modelos.map((m) => {
+  const slug = slugify(m.nome);
+  const url = new URL(`/ficha-tecnica#${slug}`, Astro.site).href;
+  const shareText = `Confira a ficha técnica do ${m.nome} (${m.marca}) — Guia do Autopropelido`;
+  return { ...m, slug, url, shareText };
+});
 ---
 
 <BaseLayout
@@ -14,8 +34,8 @@ import { modelos } from '../data/modelos.js';
     </header>
 
     <div class="ficha-lista">
-      {modelos.map((modelo, i) => (
-        <article class="ficha-card">
+      {modelosComMeta.map((modelo, i) => (
+        <article class="ficha-card" id={modelo.slug}>
           <div class="ficha-imagem">
             <img src={modelo.imagem} alt={`Autopropelido ${modelo.nome}`} loading={i === 0 ? 'eager' : 'lazy'} />
           </div>
@@ -42,6 +62,8 @@ import { modelos } from '../data/modelos.js';
             <a class="ficha-busca" href={`/buscar?q=${encodeURIComponent(modelo.nome)}`}>
               Ver notícias sobre o {modelo.nome} →
             </a>
+
+            <ShareButtons url={modelo.url} title={modelo.shareText} variant="compact" />
           </div>
         </article>
       ))}
