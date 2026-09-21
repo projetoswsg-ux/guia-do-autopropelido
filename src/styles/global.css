@@ -1198,3 +1198,54 @@ img {
 html {
   scroll-behavior: smooth;
 }
+
+
+
+
+
+
+
+
+/* ==============================
+   Navegação estrutural (breadcrumbs)
+   ============================== */
+.breadcrumbs {
+  margin-bottom: 24px;
+  font-size: 0.85rem;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumbs li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breadcrumbs li:not(:last-child)::after {
+  content: "›";
+  color: #bbb;
+  font-weight: 400;
+}
+
+.breadcrumbs a {
+  color: #666;
+}
+
+.breadcrumbs a:hover {
+  color: #1a1a1a;
+  text-decoration: underline;
+}
+
+.breadcrumbs span[aria-current="page"] {
+  color: #1a1a1a;
+  font-weight: 600;
+}
