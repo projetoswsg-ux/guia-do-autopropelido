@@ -1,0 +1,7 @@
+---
+// Componente genérico que injeta JSON-LD no <head> da página
+// Uso: <SchemaOrg slot="head" schema={meuSchema} />
+const { schema } = Astro.props;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
