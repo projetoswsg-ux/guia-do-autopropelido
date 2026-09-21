@@ -1,27 +1,124 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+const todasNoticias = await getCollection('noticias');
+
 const marcas = [
-  { nome: 'XZ Motors', pais: 'Brasil', destaque: 'Startup nacional focada em autopropelidos acessíveis.' },
-  { nome: 'AutoNova', pais: 'EUA', destaque: 'Pioneira em veículos autônomos de nível 4.' },
-  { nome: 'VoltRide', pais: 'Alemanha', destaque: 'Especializada em mobilidade urbana elétrica e autônoma.' },
-  { nome: 'NipoDrive', pais: 'Japão', destaque: 'Tradição em robótica aplicada à mobilidade.' },
+  {
+    nome: 'XZ Motors',
+    pais: 'Brasil',
+    destaque: 'Startup nacional focada em autopropelidos acessíveis.',
+    site: '',
+  },
+  {
+    nome: 'AutoNova',
+    pais: 'EUA',
+    destaque: 'Pioneira em veículos autônomos de nível 4.',
+    site: '',
+  },
+  {
+    nome: 'VoltRide',
+    pais: 'Itália',
+    destaque: 'Especializada em mobilidade urbana elétrica e autônoma.',
+    site: '',
+  },
+  {
+    nome: 'NipoDrive',
+    pais: 'China',
+    destaque: 'Tradição em robótica aplicada à mobilidade.',
+    site: '',
+  },
 ];
+
+// Ordem de exibição dos países
+const ordemPaises = ['Brasil', 'China', 'EUA', 'Itália'];
+
+// Normaliza texto (minúsculas, sem acento)
+function norm(s) {
+  return (s || '')
+    .toString()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+
+// Encontra notícias que mencionam a marca
+function noticiasDaMarca(marca) {
+  const termo = norm(marca.nome);
+  return todasNoticias
+    .filter((n) => {
+      const texto = norm(`${n.data.title} ${n.data.description} ${n.body || ''}`);
+      return texto.includes(termo);
+    })
+    .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+    .slice(0, 3);
+}
+
+// Anexa as notícias a cada marca
+const marcasComNoticias = marcas.map((m) => ({
+  ...m,
+  noticias: noticiasDaMarca(m),
+}));
+
+// Agrupa por país
+const marcasPorPais = marcasComNoticias.reduce((acc, marca) => {
+  if (!acc[marca.pais]) acc[marca.pais] = [];
+  acc[marca.pais].push(marca);
+  return acc;
+}, {});
 ---
 
-<BaseLayout title="Marcas — Guia do Autopropelido">
-  <section style="margin: 40px 0;">
-    <h1 style="font-size: 2rem; margin-bottom: 8px;">Marcas</h1>
-    <p style="color: #666; margin-bottom: 32px;">Principais fabricantes de autopropelidos no mundo.</p>
+<BaseLayout
+  title="Marcas — Guia do Autopropelido"
+  description="Principais fabricantes de autopropelidos no Brasil e no mundo, organizados por país."
+>
+  <section class="marcas-page">
+    <header class="marcas-header">
+      <h1>Marcas</h1>
+      <p>Principais fabricantes de autopropelidos no mundo, organizados por país de origem.</p>
+    </header>
 
-    <div style="display: grid; gap: 24px;">
-      {marcas.map((marca) => (
-        <div style="border: 1px solid #e0e0e0; padding: 24px; border-radius: 4px;">
-          <h2 style="font-size: 1.3rem; margin-bottom: 4px;">{marca.nome}</h2>
-          <span style="font-size: 0.85rem; color: #888; text-transform: uppercase;">{marca.pais}</span>
-          <p style="margin-top: 8px; color: #444;">{marca.destaque}</p>
-        </div>
-      ))}
-    </div>
+    {ordemPaises.map((pais) => (
+      marcasPorPais[pais] && (
+        <section class="marcas-pais">
+          <h2 class="marcas-pais-titulo">
+            <span class="marcas-pais-bandeira">{pais}</span>
+          </h2>
+
+          <div class="marcas-grid">
+            {marcasPorPais[pais].map((marca) => (
+              <article class="marca-card">
+                <header class="marca-cabecalho">
+                  <h3 class="marca-nome">{marca.nome}</h3>
+                  <span class="marca-pais">{marca.pais}</span>
+                </header>
+
+                <p class="marca-destaque">{marca.destaque}</p>
+
+                {marca.noticias.length > 0 && (
+                  <div class="marca-noticias">
+                    <span class="marca-noticias-titulo">Na mídia</span>
+                    <ul>
+                      {marca.noticias.map((n) => (
+                        <li>
+                          <a href={`/noticias/${n.slug}`}>
+                            {n.data.title}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <a class="marca-busca" href={`/buscar?q=${encodeURIComponent(marca.nome)}`}>
+                  Ver tudo sobre {marca.nome} →
+                </a>
+              </article>
+            ))}
+          </div>
+        </section>
+      )
+    ))}
   </section>
 </BaseLayout>
