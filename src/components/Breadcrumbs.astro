@@ -1,0 +1,32 @@
+---
+// Recebe um array de itens: { label, href? }
+// O último item (sem href) é a página atual.
+const { items = [] } = Astro.props;
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": items.map((item, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": item.label,
+    ...(item.href ? { "item": new URL(item.href, Astro.site).href } : {}),
+  })),
+};
+---
+
+<nav class="breadcrumbs" aria-label="Navegação estrutural">
+  <ol>
+    {items.map((item, i) => (
+      <li>
+        {item.href && i < items.length - 1 ? (
+          <a href={item.href}>{item.label}</a>
+        ) : (
+          <span aria-current="page">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
