@@ -13,6 +13,7 @@ export const modelos = [
     imagem: 'https://guia-do-autopropelido.vercel.app/moto-modelo/jetmax_motochefe.webp',
     descricao: 'Veículo Autopropelido.',
     especificacoes: [
+          { label: 'Marca', valor: 'Moto Chefe' },
       { label: 'Modelo', valor: 'Scooter' },
       { label: 'Bateria', valor: 'Lítio' },
       { label: 'Potência', valor: '1000W' },
