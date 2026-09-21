@@ -36,8 +36,9 @@ const schemaFicha = {
     "@type": "ListItem",
     "position": index + 1,
     "item": {
-      "@type": ["Product", "Vehicle"],
-      "name": m.nome,
+    "@type": "Vehicle",
+    "name": m.nome,
+    "vehicleConfiguration": m.marca,
       "description": m.descricao,
       "image": m.imagem,
       "url": m.url,
