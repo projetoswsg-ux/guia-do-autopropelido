@@ -1,32 +1,104 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const especificacoes = [
-  { label: 'Autonomia', valor: '120 km' },
-  { label: 'Velocidade máxima', valor: '80 km/h' },
-  { label: 'Tempo de recarga', valor: '45 min (80%)' },
-  { label: 'Nível de autonomia', valor: '4' },
-  { label: 'Sensores', valor: 'LiDAR 360°, câmeras HD, radar' },
-  { label: 'Conectividade', valor: '5G, Wi-Fi, Bluetooth' },
-  { label: 'Capacidade', valor: '4 passageiros' },
-  { label: 'Peso', valor: '1.200 kg' },
+// ============================================
+// ADICIONE/EDITE MODELOS AQUI
+// Cada objeto vira um card na página
+// ============================================
+const modelos = [
+  {
+    nome: 'XZ-4000',
+    marca: 'XZ Motors',
+    imagem: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1200',
+    descricao: 'Autopropelido urbano de nível 4, focado em mobilidade compartilhada e uso particular em grandes cidades.',
+    especificacoes: [
+      { label: 'Autonomia', valor: '120 km' },
+      { label: 'Velocidade máxima', valor: '80 km/h' },
+      { label: 'Tempo de recarga', valor: '45 min (80%)' },
+      { label: 'Nível de autonomia', valor: '4' },
+      { label: 'Sensores', valor: 'LiDAR 360°, câmeras HD, radar' },
+      { label: 'Conectividade', valor: '5G, Wi-Fi, Bluetooth' },
+      { label: 'Capacidade', valor: '4 passageiros' },
+      { label: 'Peso', valor: '1.200 kg' },
+    ],
+  },
+  {
+    nome: 'AutoNova Prime',
+    marca: 'AutoNova',
+    imagem: 'https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=1200',
+    descricao: 'Modelo premium com foco em viagens intermunicipais e alto conforto para os passageiros.',
+    especificacoes: [
+      { label: 'Autonomia', valor: '350 km' },
+      { label: 'Velocidade máxima', valor: '120 km/h' },
+      { label: 'Tempo de recarga', valor: '30 min (80%)' },
+      { label: 'Nível de autonomia', valor: '5' },
+      { label: 'Sensores', valor: 'LiDAR 360°, câmeras 8K, radar, ultrassom' },
+      { label: 'Conectividade', valor: '5G, Wi-Fi 6, Bluetooth 5.3' },
+      { label: 'Capacidade', valor: '5 passageiros' },
+      { label: 'Peso', valor: '1.850 kg' },
+    ],
+  },
+  {
+    nome: 'VoltRide City',
+    marca: 'VoltRide',
+    imagem: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=1200',
+    descricao: 'Compacto pensado para centros urbanos densos, com foco em manobrabilidade e baixo consumo.',
+    especificacoes: [
+      { label: 'Autonomia', valor: '90 km' },
+      { label: 'Velocidade máxima', valor: '60 km/h' },
+      { label: 'Tempo de recarga', valor: '35 min (80%)' },
+      { label: 'Nível de autonomia', valor: '3' },
+      { label: 'Sensores', valor: 'LiDAR 180°, câmeras HD, radar traseiro' },
+      { label: 'Conectividade', valor: '4G, Wi-Fi, Bluetooth' },
+      { label: 'Capacidade', valor: '2 passageiros' },
+      { label: 'Peso', valor: '780 kg' },
+    ],
+  },
 ];
 ---
 
-<BaseLayout title="Ficha Técnica — Guia do Autopropelido">
-  <section style="margin: 40px 0;">
-    <h1 style="font-size: 2rem; margin-bottom: 8px;">Ficha Técnica</h1>
-    <p style="color: #666; margin-bottom: 32px;">Especificações do modelo de referência XZ-4000.</p>
+<BaseLayout
+  title="Ficha Técnica — Guia do Autopropelido"
+  description="Especificações técnicas dos principais modelos de autopropelidos disponíveis no mercado."
+>
+  <section class="ficha-page">
+    <header class="ficha-header">
+      <h1>Ficha Técnica</h1>
+      <p>Especificações técnicas dos principais modelos de autopropelidos do mercado.</p>
+    </header>
 
-    <table style="width: 100%; border-collapse: collapse; max-width: 720px;">
-      <tbody>
-        {especificacoes.map((item, i) => (
-          <tr style={i % 2 === 0 ? 'background: #f9f9f9;' : ''}>
-            <td style="padding: 12px 16px; font-weight: 600; border: 1px solid #e0e0e0; width: 40%;">{item.label}</td>
-            <td style="padding: 12px 16px; border: 1px solid #e0e0e0;">{item.valor}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div class="ficha-lista">
+      {modelos.map((modelo, i) => (
+        <article class="ficha-card">
+          <div class="ficha-imagem">
+            <img src={modelo.imagem} alt={`Autopropelido ${modelo.nome}`} loading={i === 0 ? 'eager' : 'lazy'} />
+          </div>
+
+          <div class="ficha-conteudo">
+            <header class="ficha-card-header">
+              <h2 class="ficha-modelo">{modelo.nome}</h2>
+              <span class="ficha-marca">{modelo.marca}</span>
+            </header>
+
+            <p class="ficha-descricao">{modelo.descricao}</p>
+
+            <table class="ficha-tabela">
+              <tbody>
+                {modelo.especificacoes.map((item, idx) => (
+                  <tr class={idx % 2 === 0 ? 'ficha-linha-par' : ''}>
+                    <td class="ficha-label">{item.label}</td>
+                    <td class="ficha-valor">{item.valor}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <a class="ficha-busca" href={`/buscar?q=${encodeURIComponent(modelo.nome)}`}>
+              Ver notícias sobre o {modelo.nome} →
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
   </section>
 </BaseLayout>
