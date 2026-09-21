@@ -855,3 +855,165 @@ img {
     gap: 12px;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==============================
+   Página de marcas
+   ============================== */
+.marcas-page {
+  max-width: 1000px;
+  margin: 40px auto;
+}
+
+.marcas-header {
+  margin-bottom: 40px;
+}
+
+.marcas-header h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.marcas-header p {
+  color: #666;
+}
+
+.marcas-pais {
+  margin-bottom: 48px;
+}
+
+.marcas-pais-titulo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  border-bottom: 3px solid #1a1a1a;
+  color: #1a1a1a;
+}
+
+.marcas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.marca-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 20px;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.marca-card:hover {
+  border-color: #1a1a1a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.marca-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.marca-nome {
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.marca-pais {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+  flex-shrink: 0;
+}
+
+.marca-destaque {
+  font-size: 0.95rem;
+  color: #444;
+  margin-bottom: 16px;
+}
+
+.marca-noticias {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid #eee;
+  margin-bottom: 12px;
+}
+
+.marca-noticias-titulo {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #0066cc;
+  margin-bottom: 8px;
+}
+
+.marca-noticias ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.marca-noticias li {
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.marca-noticias li:last-child {
+  margin-bottom: 0;
+}
+
+.marca-noticias a {
+  color: #1a1a1a;
+}
+
+.marca-noticias a:hover {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+.marca-busca {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0066cc;
+  margin-top: 4px;
+}
+
+.marca-busca:hover {
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .marcas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .marcas-pais-titulo {
+    font-size: 1.15rem;
+  }
+}
