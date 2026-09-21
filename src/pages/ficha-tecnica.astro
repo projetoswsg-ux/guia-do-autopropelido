@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ShareButtons from '../components/ShareButtons.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import SchemaOrg from '../components/SchemaOrg.astro';
 import { modelos } from '../data/modelos.js';
 
-// Gera um id âncora a partir do nome do modelo
+// Slug a partir do nome do modelo (para âncora)
 function slugify(s) {
   return s
     .toString()
@@ -21,13 +23,52 @@ const modelosComMeta = modelos.map((m) => {
   const shareText = `Confira a ficha técnica do ${m.nome} (${m.marca}) — Guia do Autopropelido`;
   return { ...m, slug, url, shareText };
 });
+
+// ============================================
+// SCHEMA ITEMLIST com cada modelo como Product/Vehicle
+// ============================================
+const schemaFicha = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Ficha Técnica — Autopropelidos",
+  "description": "Especificações técnicas dos principais modelos de autopropelidos disponíveis no mercado.",
+  "itemListElement": modelosComMeta.map((m, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "item": {
+      "@type": ["Product", "Vehicle"],
+      "name": m.nome,
+      "description": m.descricao,
+      "image": m.imagem,
+      "url": m.url,
+      "brand": {
+        "@type": "Brand",
+        "name": m.marca,
+      },
+      "additionalProperty": m.especificacoes.map((e) => ({
+        "@type": "PropertyValue",
+        "name": e.label,
+        "value": e.valor,
+      })),
+    },
+  })),
+};
 ---
 
 <BaseLayout
   title="Ficha Técnica — Guia do Autopropelido"
-  description="Especificações técnicas dos principais modelos de autopropelidos disponíveis no mercado."
+  description="Especificações técnicas dos principais modelos de autopropelidos: autonomia, velocidade, bateria, potência e mais."
 >
+  <SchemaOrg slot="head" schema={schemaFicha} />
+
   <section class="ficha-page">
+    <Breadcrumbs
+      items={[
+        { label: 'Início', href: '/' },
+        { label: 'Ficha Técnica' },
+      ]}
+    />
+
     <header class="ficha-header">
       <h1>Ficha Técnica</h1>
       <p>Especificações técnicas dos principais modelos de autopropelidos do mercado.</p>
@@ -37,7 +78,13 @@ const modelosComMeta = modelos.map((m) => {
       {modelosComMeta.map((modelo, i) => (
         <article class="ficha-card" id={modelo.slug}>
           <div class="ficha-imagem">
-            <img src={modelo.imagem} alt={`Autopropelido ${modelo.nome}`} loading={i === 0 ? 'eager' : 'lazy'} />
+            <img
+              src={modelo.imagem}
+              alt={`Autopropelido ${modelo.nome} da marca ${modelo.marca}`}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              width="1200"
+              height="675"
+            />
           </div>
 
           <div class="ficha-conteudo">
