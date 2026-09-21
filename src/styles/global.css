@@ -1053,6 +1053,7 @@ img {
   overflow: hidden;
   background: #fff;
   transition: box-shadow 0.2s;
+  scroll-margin-top: 100px; 
 }
 
 .ficha-card:hover {
@@ -1159,4 +1160,41 @@ img {
   .ficha-label {
     width: 45%;
   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Variante compacta do share-bar (usada em cards da ficha técnica) */
+.share-bar.is-compact {
+  margin: 16px 0 0;
+  padding: 14px 0 0;
+  border-top: 1px solid #eee;
+  gap: 6px;
+}
+
+.share-bar.is-compact .share-btn {
+  padding: 6px 10px;
+  font-size: 0.75rem;
+}
+
+.share-bar.is-compact .share-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+
+
+html {
+  scroll-behavior: smooth;
 }
