@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { modelos } from '../data/modelos.js';
 
 const noticias = await getCollection('noticias');
 
@@ -20,8 +21,26 @@ const indiceNoticias = noticias.map((n) => ({
     .slice(0, 500),
 }));
 
+// Índice dos modelos da ficha técnica (automático)
+const indiceModelos = modelos.map((m) => {
+  // Junta as especificações em texto para facilitar a busca
+  const especsTexto = m.especificacoes
+    .map((e) => `${e.label} ${e.valor}`)
+    .join(' ');
+
+  return {
+    tipo: 'modelo',
+    title: `${m.nome} — ${m.marca}`,
+    description: m.descricao,
+    url: '/ficha-tecnica',
+    date: '',
+    category: 'Ficha Técnica',
+    image: m.imagem,
+    body: `modelo ficha tecnica especificacoes ${m.nome} ${m.marca} ${especsTexto}`,
+  };
+});
+
 // Índice das páginas estáticas (manual)
-// Adicione/edite aqui sempre que criar uma nova página no site
 const paginas = [
   {
     tipo: 'pagina',
@@ -41,7 +60,7 @@ const paginas = [
     date: '',
     category: 'Página',
     image: '',
-    body: 'marcas fabricantes empresas modelos xz motors autonova voltride nipodrive',
+    body: 'marcas fabricantes empresas modelos xz motors autonova voltride motochefe',
   },
   {
     tipo: 'pagina',
@@ -51,7 +70,7 @@ const paginas = [
     date: '',
     category: 'Página',
     image: '',
-    body: 'ficha tecnica especificacoes autonomia velocidade recarga sensores lidar 5g capacidade peso',
+    body: 'ficha tecnica especificacoes autonomia velocidade recarga sensores lidar 5g capacidade peso modelos',
   },
   {
     tipo: 'pagina',
@@ -75,7 +94,7 @@ const paginas = [
   },
 ];
 
-const indice = [...indiceNoticias, ...paginas];
+const indice = [...indiceNoticias, ...indiceModelos, ...paginas];
 ---
 
 <BaseLayout title="Buscar — Guia do Autopropelido" description="Busque notícias, marcas, modelos e páginas no Guia do Autopropelido">
@@ -167,9 +186,10 @@ const indice = [...indiceNoticias, ...paginas];
         return;
       }
 
-      // Ordena: páginas primeiro, depois notícias (mais recentes primeiro)
+      // Ordena: páginas e modelos primeiro, notícias depois (mais recentes primeiro)
       matches.sort((a, b) => {
-        if (a.tipo !== b.tipo) return a.tipo === 'pagina' ? -1 : 1;
+        const peso = { pagina: 0, modelo: 1, noticia: 2 };
+        if (peso[a.tipo] !== peso[b.tipo]) return peso[a.tipo] - peso[b.tipo];
         return (b.date || '').localeCompare(a.date || '');
       });
 
