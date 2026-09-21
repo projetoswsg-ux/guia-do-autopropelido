@@ -184,7 +184,7 @@ const marcasPorPais = marcasComNoticias.reduce((acc, marca) => {
   <section class="marcas-page">
     <header class="marcas-header">
       <h1>Marcas, Fabricantes e Distribuidores.</h1>
-      <p>Principais marcas, fabricantes e distribuidores de autopropelidos no Brasil.</p>
+      <p>Principais marcas, fabricantes e distribuidores de autopropelido no Brasil.</p>
     </header>
 
     {ordemPaises.map((pais) => (
@@ -220,7 +220,7 @@ const marcasPorPais = marcasComNoticias.reduce((acc, marca) => {
                 )}
 
                 <a class="marca-busca" href={`/buscar?q=${encodeURIComponent(marca.nome)}`}>
-                  Ver tudo sobre {marca.nome} →
+                  Ver mais sobre {marca.nome} →
                 </a>
               </article>
             ))}
