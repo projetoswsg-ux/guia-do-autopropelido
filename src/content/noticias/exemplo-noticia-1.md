@@ -39,7 +39,7 @@ Tecnicamente, a Giga Vasco é equipada com motor elétrico de 1.000 watts, o lim
 R10:
 O segundo modelo, batizado como R10, faz uma referência direta a um dos maiores ídolos da história do futebol brasileiro: O "bruxo" Ronaldinho gaúcho, atleta que fez história ventindo o manto do canarinho.
 
-image: "https://motochefebrasil.com.br/wp-content/uploads/2026/07/qd12.png"
+![R10 — autopropelido da MotoChefe](https://motochefebrasil.com.br/wp-content/uploads/2026/07/qd12.png)
 
 O R10 é um modelo com uma pegada bem esportiva, pensado para quem busca agilidade nos deslocamentos urbanos. Seu design é mais compacto que a Giga Vasco, com um modelo de farol mais moderno. As cores predominantes são o verde e amarelo, em alusão as cores do Brasil.
 
