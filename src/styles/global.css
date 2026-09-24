@@ -1263,20 +1263,45 @@ html {
 
 
 
-/* Imagens dentro do corpo do artigo */
-.article-body img {
-  display: block;
+/* ==============================
+   Figura com moldura e legenda (artigos)
+   ============================== */
+.article-figure {
+  margin: 32px auto;
+  padding: 12px;
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
   max-width: 100%;
-  height: auto;
-  margin: 24px auto;
-  border-radius: 4px;
 }
 
-/* Legenda (figcaption) */
-.article-body figcaption {
+.article-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 0;
+}
+
+.article-figure figcaption {
+  margin-top: 12px;
   font-size: 0.85rem;
-  color: #888;
+  line-height: 1.4;
+  color: #666;
   text-align: center;
-  margin-top: 8px;
   font-style: italic;
+  padding: 0 8px;
+}
+
+/* No mobile, reduz o espaçamento interno */
+@media (max-width: 480px) {
+  .article-figure {
+    padding: 8px;
+    margin: 24px auto;
+  }
+
+  .article-figure figcaption {
+    font-size: 0.8rem;
+    margin-top: 10px;
+  }
 }
